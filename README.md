@@ -1,10 +1,10 @@
-##DEMO
+## DEMO
 
 http://luntegg.ru/projects/vk-dropdown/demo/
 
 VanillaJS + ES6 + babel + gulp
 
-##TASK
+## TASK
 
 Реализовать UI дропдаун, который в зависимости от параметров инициализации позволяет:
 - выбирать только один пункт из списка;
