@@ -62,6 +62,8 @@ class VkDropdown {
         this._onMouseOver = this._onMouseOver.bind(this);
         this._onTouchMove = this._onTouchMove.bind(this);
         this._onTouchEnd = this._onTouchEnd.bind(this);
+        this._onFocus = this._onFocus.bind(this);
+        this._onBlur = this._onBlur.bind(this);
 
         this._init();
     }
@@ -79,6 +81,9 @@ class VkDropdown {
         document.addEventListener('mouseover', this._onMouseOver);
         document.addEventListener('touchmove', this._onTouchMove);
         document.addEventListener('touchend', this._onTouchEnd);
+
+        this.input.addEventListener('focus', this._onFocus);
+        this.input.addEventListener('blur', this._onBlur);
     }
 
     _removeEventListeners() {
@@ -87,6 +92,10 @@ class VkDropdown {
         document.removeEventListener('mouseover', this._onMouseOver);
         document.removeEventListener('touchmove', this._onTouchMove);
         document.removeEventListener('touchend', this._onTouchEnd);
+
+
+        this.input.removeEventListener('focus', this._onFocus);
+        this.input.removeEventListener('blur', this._onBlur);
     }
 
     _onKeyDown(e) {
@@ -243,6 +252,28 @@ class VkDropdown {
         }
 
         this.wasTap = true;
+    }
+
+    _onFocus(e) {
+        const target = e.target;
+        const hasActiveDropdown = this.list.classList.contains(this.config.classNames.activeState);
+
+        if (this.container.contains(target)) {
+            if (!hasActiveDropdown) {
+                this.showDropdown();
+            }
+        }
+    }
+
+    _onBlur(e) {
+        const target = e.target;
+        const hasActiveDropdown = this.list.classList.contains(this.config.classNames.activeState);
+
+        if (this.container.contains(target)) {
+            if (hasActiveDropdown) {
+                this.hideDropdown();
+            }
+        }
     }
 
     _highlightElement(element) {
