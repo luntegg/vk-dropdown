@@ -267,9 +267,10 @@ class VkDropdown {
 
     _onBlur(e) {
         const target = e.target;
+        const relatedTarget = e.relatedTarget;
         const hasActiveDropdown = this.list.classList.contains(this.config.classNames.activeState);
 
-        if (this.container.contains(target)) {
+        if (relatedTarget && this.container.contains(target) && !this.container.contains(relatedTarget)) {
             if (hasActiveDropdown) {
                 this.hideDropdown();
             }
